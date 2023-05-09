@@ -1,0 +1,42 @@
+<div class="grid place-items-center">
+
+    <section class="container  max-w-screen-lg xl:px-8 xl:py-6">
+      <header class="bg-white space-y-4 sm:px-8 sm:py-6 lg:p-4  text-center ">
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold text-slate-900">Usuários do Github</h2>
+        </div>
+        <form class="group relative flex items-center" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+          <svg width="20" height="20" fill="currentColor" class="absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
+          </svg>
+          <input
+            class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+            type="text"
+            aria-label="Filter projects"
+            placeholder="Insira o username"
+            id="usernameValue"
+            name="usernameValue"
+            [(ngModel)]="usernameValue"
+            >
+          <app-custom-button
+            [class]="'ml-2 text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center'"
+            [isLoading]="isLoading"
+            [text]="'Buscar'"
+            [type]="'submit'"
+          />
+
+        </form>
+      </header>
+      <div *ngIf="lastSearchedUsers.length > 0" class="result-users space-y-4 sm:px-8 sm:py-6 lg:p-4  text-left">
+        <h2>Ultimo pesquisado</h2>
+        <app-list [tableHeaders]="listHeaders" [items]="getFormattedLastSearched(true)" [callbackFunction]="toggleModal" [completeItems]="[lastSearchedUsers[lastSearchedUsers.length -1]]" />
+      </div>
+      <div *ngIf="lastSearchedUsers.length > 0" class="result-users space-y-4 sm:px-8 sm:py-6 lg:p-4  text-left">
+        <h2>Ultimos pesquisados</h2>
+        <app-list [tableHeaders]="listHeaders" [items]="getFormattedLastSearched()" [callbackFunction]="toggleModal" [completeItems]="lastSearchedUsers" />
+      </div>
+    </section>
+
+</div>
+
+

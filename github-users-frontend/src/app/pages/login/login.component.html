@@ -1,0 +1,62 @@
+<div class="grid h-screen place-items-center">
+    <div class="">
+        <div class="w-full max-w-xs">
+          <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          *ngIf="!isLoggedIn"
+          name="userData"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate
+      >
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+            E-mail
+          </label>
+          <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              placeholder="E-mail"
+              name="email"
+              [(ngModel)]="userData.email"
+              required
+              email
+              #email="ngModel"
+          >
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+            Senha
+          </label>
+          <input
+              class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              placeholder="******************"
+              [(ngModel)]="userData.password"
+              required
+              minlength="6"
+              name="password"
+              #password="ngModel"
+          >
+          <div *ngIf="password.errors && f.submitted">
+              <p class="text-red-500 text-xs italic" *ngIf="password.errors['required']" >Insira a senha.</p>
+          </div>
+
+        </div>
+              <div class="flex items-center justify-between">
+                <app-custom-button
+                  [class]="'w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'"
+                  [isLoading]="isLoading"
+                  [text]="isLoading ? '': 'Entrar'"
+                  [type]="'submit'"
+                />
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/register">
+                  Criar conta
+                </a>
+              </div>
+            </form>
+        </div>
+    </div>
+
+</div>
